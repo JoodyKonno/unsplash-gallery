@@ -26,8 +26,15 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import SearchPhotosService from '@/services/SearchPhotosService'
 
 export default {
+  async mounted() {
+    const data = await SearchPhotosService.query({ q: 'lakes' })
+
+    console.log(data)
+  },
+
   components: {
     Logo
   }
