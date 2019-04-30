@@ -24,7 +24,7 @@ export const actions = {
 
   getTermsFromStorage({ commit }) {
     const storageLastTerms = LocalStorage.getObject('lastTerms')
-    if (storageLastTerms !== undefined) {
+    if (storageLastTerms !== null) {
       commit('setLastTerms', storageLastTerms)
     }
   },
