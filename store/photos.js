@@ -1,12 +1,9 @@
 import SeachPhotosService from '../services/SearchPhotosService'
+import PhotoModel from '../models/PhotoModel'
 
 export const state = () => ({
   searchTerm: 'lakes',
   items: [],
-})
-
-export const getters = () => ({
-  items: ({ state }) => state.items,
 })
 
 export const actions = {
@@ -15,7 +12,7 @@ export const actions = {
       q: state.searchTerm,
     })
 
-    commit('setPhotos', response)
+    commit('setPhotos', response.results.map(result => new PhotoModel(result)))
   }
 }
 
