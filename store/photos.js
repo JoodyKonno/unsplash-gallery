@@ -5,11 +5,19 @@ import PhotoModel from '../models/PhotoModel'
 export const state = () => ({
   searchTerm: '',
   items: [],
+  item: {},
   lastTerms: [],
 })
 
 export const getters = {
-  lastTerms: state => state.lastTerms.slice().reverse()
+  lastTerms: state => state.lastTerms.slice().reverse(),
+  item: state => state.item,
+  author: state => {
+    if (!state.author) {
+      return ''
+    }
+    return state.author
+  }
 }
 
 export const actions = {
@@ -28,11 +36,31 @@ export const actions = {
       commit('setLastTerms', storageLastTerms)
     }
   },
+
+  loadPhoto({ state, commit }, { id }) {
+    const selectedItems = state.items.filter(item => item.id === id)
+    const cachedPhoto = LocalStorage.getObject('photoPost')
+
+    if (selectedItems.length) {
+      commit('setPhoto', selectedItems[0])
+    } else if (cachedPhoto && cachedPhoto.id === id) {
+      commit('setPhoto', cachedPhoto)
+    }
+  },
 }
 
 export const mutations = {
   setPhotos(state, payload) {
     state.items = payload
+  },
+
+  setPhoto(state, payload) {
+    state.item = payload
+    LocalStorage.setObject('photoPost', state.item)
+  },
+
+  loadPhoto(state, id) {
+    state.item = state.items.filter(item => item.id === id)
   },
 
   addTermToStack(state) {
