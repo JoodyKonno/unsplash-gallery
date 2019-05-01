@@ -11,8 +11,7 @@
         <div class="ma-10">
           <div class="photo-author ta-left pb-5 mb-15">
             <img :src="photo.author.profileImageSmall" />
-            <span>From:</span>
-            <span>{{ photo.author.username }}</span>
+            <span class="photo-author-username fs-11 fw-700">{{ photo.author.username }}</span>
           </div>
 
           <div class="photo-description ta-justify">
@@ -60,6 +59,15 @@ export default {
 
     & .photo-author {
       border-bottom: 1px solid $grey-f3;
+
+      & img {
+        border-radius: 50%;
+      }
+
+      & .photo-author-username {
+        color: $grey-666;
+        text-decoration: underline;
+      }
     }
 
     & .photo-description {

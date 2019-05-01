@@ -72,3 +72,9 @@
     font-size: #{$size}px;
   }
 }
+
+@each $weight in $font-weights {
+  .fw-#{$weight} {
+    font-weight: #{$weight};
+  }
+}
