@@ -3,6 +3,17 @@
   margin: 0 auto;
 }
 
+.card {
+  border: 1px solid $grey-ccc;
+  padding: 10px;
+  text-align: center;
+  @include borderRadius(5px);
+
+  &.white {
+    background-color: $white;
+  }
+}
+
 @each $size in $margin-sizes {
   .mx-#{$size} {
     margin: 0 #{$size}px;

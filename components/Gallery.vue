@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="columns">
-      <div class="column" v-for="photo in photos" :key="photo.id">
+      <div class="column card white" v-for="photo in photos" :key="photo.id">
         <div>
           <img :src="photo.author.profileImageSmall" />
           <span>From:</span>
