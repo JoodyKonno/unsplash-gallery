@@ -6,7 +6,9 @@
         <span>From:</span>
         <span>{{ photo.author.firstName }} {{ photo.author.lastName }}</span>
       </div>
-      <img :src="photo.thumbImageSrc" :alt="photo.altDescription">
+      <nuxt-link :to="`/photo/${photo.id}`">
+        <img :src="photo.thumbImageSrc" :alt="photo.altDescription">
+      </nuxt-link>
       <div>
         <span>{{ photo.description }}</span>
       </div>
