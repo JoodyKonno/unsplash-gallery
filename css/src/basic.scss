@@ -5,7 +5,6 @@
 
 .card {
   border: 1px solid $grey-ccc;
-  padding: 10px;
   text-align: center;
   @include borderRadius(5px);
 
@@ -40,24 +39,36 @@
 
 @each $size in $padding-sizes {
   .px-#{$size} {
-    margin: 0 #{$size}px;
+    padding: 0 #{$size}px;
   }
   .py-#{$size} {
-    margin: #{$size}px 0;
+    padding: #{$size}px 0;
   }
   .pa-#{$size} {
-    margin: #{$size}px;
+    padding: #{$size}px;
   }
   .pt-#{$size} {
-    margin-top: #{$size}px;
+    padding-top: #{$size}px;
   }
   .pb-#{$size} {
-    margin-bottom: #{$size}px;
+    padding-bottom: #{$size}px;
   }
   .pr-#{$size} {
-    margin-right: #{$size}px;
+    padding-right: #{$size}px;
   }
   .pl-#{$size} {
-    margin-left: #{$size}px;
+    padding-left: #{$size}px;
+  }
+}
+
+@each $style in $text-align-styles {
+  .ta-#{$style} {
+    text-align: #{$style};
+  }
+}
+
+@each $size in $font-sizes {
+  .fs-#{$size} {
+    font-size: #{$size}px;
   }
 }

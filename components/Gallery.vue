@@ -1,17 +1,25 @@
 <template>
   <section>
     <div class="columns">
-      <div class="column card white" v-for="photo in photos" :key="photo.id">
-        <div>
-          <img :src="photo.author.profileImageSmall" />
-          <span>From:</span>
-          <span>{{ photo.author.firstName }} {{ photo.author.lastName }}</span>
-        </div>
+      <div class="photo card white" v-for="photo in photos" :key="photo.id">
         <nuxt-link :to="`/photo/${photo.id}`">
-          <img :src="photo.thumbImageSrc" :alt="photo.altDescription">
+          <div class="photo-image">
+            <div class="photo-image-src" :style="photoBackgroundStyle(photo)"></div>
+          </div>
         </nuxt-link>
-        <div>
-          <span>{{ photo.description }}</span>
+
+        <div class="ma-10">
+          <div class="photo-author ta-left pb-5 mb-15">
+            <img :src="photo.author.profileImageSmall" />
+            <span>From:</span>
+            <span>{{ photo.author.username }}</span>
+          </div>
+
+          <div class="photo-description ta-justify">
+            <span class="fs-12">
+              {{ photo.description }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -26,7 +34,39 @@ export default {
     photos() {
       return this.$store.state.photos.items
     },
+  },
+
+  methods: {
+    photoBackgroundStyle(photo) {
+      return {
+        'background': `url(${photo.smallImageSrc}) no-repeat center`
+      }
+    },
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .photo {
+    & .photo-image {
+      height: 350px;
+      background-color: $grey-333;
+
+      & .photo-image-src {
+        width: auto;
+        height: inherit;
+      }
+    }
+
+    & .photo-author {
+      border-bottom: 1px solid $grey-f3;
+    }
+
+    & .photo-description {
+      height: 100px;
+      color: $grey-666;
+    }
+  }
+</style>
+
 
