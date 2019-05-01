@@ -2,10 +2,10 @@
   <section>
     <form>
       <input type="text" v-model.lazy="searchTerm" />
-      <input type="submit" @click="search">
+      <input type="submit" value="Search" @click="search">
     </form>
     <div>
-      <span v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
+      <span class="fs-11 fw-600" v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
         {{ term }}
       </span>
     </div>
@@ -45,3 +45,19 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+  input[type="text"] {
+    width: 80%;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    color: $grey-333;
+  }
+
+  input[type="submit"] {
+    width: 19%;
+    height: 30px;
+  }
+</style>
+
