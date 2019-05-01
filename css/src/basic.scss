@@ -1,0 +1,52 @@
+.container {
+  width: $container-width;
+  margin: 0 auto;
+}
+
+@each $size in $margin-sizes {
+  .mx-#{$size} {
+    margin: 0 #{$size}px;
+  }
+  .my-#{$size} {
+    margin: #{$size}px 0;
+  }
+  .ma-#{$size} {
+    margin: #{$size}px;
+  }
+  .mt-#{$size} {
+    margin-top: #{$size}px;
+  }
+  .mb-#{$size} {
+    margin-bottom: #{$size}px;
+  }
+  .mr-#{$size} {
+    margin-right: #{$size}px;
+  }
+  .ml-#{$size} {
+    margin-left: #{$size}px;
+  }
+}
+
+@each $size in $padding-sizes {
+  .px-#{$size} {
+    margin: 0 #{$size}px;
+  }
+  .py-#{$size} {
+    margin: #{$size}px 0;
+  }
+  .pa-#{$size} {
+    margin: #{$size}px;
+  }
+  .pt-#{$size} {
+    margin-top: #{$size}px;
+  }
+  .pb-#{$size} {
+    margin-bottom: #{$size}px;
+  }
+  .pr-#{$size} {
+    margin-right: #{$size}px;
+  }
+  .pl-#{$size} {
+    margin-left: #{$size}px;
+  }
+}
