@@ -1,6 +1,10 @@
 .container {
   width: $container-width;
   margin: 0 auto;
+
+  @include sm {
+    width: $container-sm-width;
+  }
 }
 
 .card {
