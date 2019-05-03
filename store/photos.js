@@ -7,6 +7,7 @@ export const state = () => ({
   items: [],
   item: {},
   lastTerms: [],
+  lastTermsLimit: 5,
 })
 
 export const getters = {
@@ -27,6 +28,12 @@ export const actions = {
     })
 
     if (!state.lastTerms.includes(state.searchTerm)) {
+      console.log(state.lastTerms.length >= state.lastTermsLimit)
+      console.log(state.lastTerms.length)
+      console.log(state.lastTermsLimit)
+      if (state.lastTerms.length >= state.lastTermsLimit) {
+        commit('removeOldestTerm')
+      }
       commit('addTermToStack')
     } else {
       commit('putTermOnTop')
@@ -73,8 +80,13 @@ export const mutations = {
     LocalStorage.setObject('lastTerms', state.lastTerms)
   },
 
+  removeOldestTerm(state) {
+    state.lastTerms = [
+      ...state.lastTerms.slice(1),
+    ]
+  },
+
   putTermOnTop(state) {
-    const lastTerms = state.lastTerms
     state.lastTerms = [
       ...state.lastTerms.slice(0, state.lastTerms.indexOf(state.searchTerm)),
       ...state.lastTerms.slice(state.lastTerms.indexOf(state.searchTerm) + 1),
