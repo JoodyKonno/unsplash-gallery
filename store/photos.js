@@ -7,6 +7,7 @@ export const state = () => ({
   items: [],
   item: {},
   lastTerms: [],
+  lastTermsLimit: 5,
 })
 
 export const getters = {
@@ -26,7 +27,15 @@ export const actions = {
       q: state.searchTerm,
     })
 
-    commit('addTermToStack')
+    if (!state.lastTerms.includes(state.searchTerm)) {
+      if (state.lastTerms.length >= state.lastTermsLimit) {
+        commit('removeOldestTerm')
+      }
+      commit('addTermToStack')
+    } else {
+      commit('putTermOnTop')
+    }
+
     commit('setPhotos', response.results.map(result => new PhotoModel(result)))
   },
 
@@ -65,6 +74,21 @@ export const mutations = {
 
   addTermToStack(state) {
     state.lastTerms.push(state.searchTerm)
+    LocalStorage.setObject('lastTerms', state.lastTerms)
+  },
+
+  removeOldestTerm(state) {
+    state.lastTerms = [
+      ...state.lastTerms.slice(1),
+    ]
+  },
+
+  putTermOnTop(state) {
+    state.lastTerms = [
+      ...state.lastTerms.slice(0, state.lastTerms.indexOf(state.searchTerm)),
+      ...state.lastTerms.slice(state.lastTerms.indexOf(state.searchTerm) + 1),
+      state.searchTerm,
+    ]
     LocalStorage.setObject('lastTerms', state.lastTerms)
   },
 
