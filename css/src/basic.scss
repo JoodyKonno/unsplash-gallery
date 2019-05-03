@@ -1,5 +1,4 @@
 .container {
-  width: $container-width;
   margin: 0 auto;
 
   @include sm {
@@ -8,6 +7,10 @@
 
   @include md {
     width: $container-sm-width;
+  }
+
+  @include lg {
+    width: $container-width;
   }
 }
 
@@ -18,6 +21,17 @@
 
   &.white {
     background-color: $white;
+  }
+}
+
+.button {
+  border: none;
+  font-weight: 700;
+  @include borderRadius(3px);
+
+  &.blue {
+    background-color: blue;
+    color: white;
   }
 }
 
