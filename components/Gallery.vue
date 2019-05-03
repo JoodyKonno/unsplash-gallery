@@ -73,6 +73,7 @@ export default {
     & .photo-description {
       height: 100px;
       color: $grey-666;
+      overflow-y: auto;
     }
   }
 </style>
