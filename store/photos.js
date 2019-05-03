@@ -28,9 +28,6 @@ export const actions = {
     })
 
     if (!state.lastTerms.includes(state.searchTerm)) {
-      console.log(state.lastTerms.length >= state.lastTermsLimit)
-      console.log(state.lastTerms.length)
-      console.log(state.lastTermsLimit)
       if (state.lastTerms.length >= state.lastTermsLimit) {
         commit('removeOldestTerm')
       }
