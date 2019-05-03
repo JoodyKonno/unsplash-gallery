@@ -1,5 +1,17 @@
 <template>
   <section>
+    <div class="gallery-meta my-10" v-show="photos.length">
+      <span class="fs-12">
+        Page
+        <strong>{{ currentPage }}</strong>
+        of
+        <strong>{{ totalPages }}</strong>
+        , of a total
+        <strong>{{ totalItems }}</strong>
+        images
+      </span>
+    </div>
+
     <div class="columns has-3">
       <div class="photo card white" v-for="photo in photos" :key="photo.id">
         <nuxt-link :to="`/photo/${photo.id}`">
@@ -22,6 +34,22 @@
         </div>
       </div>
     </div>
+
+    <div class="gallery-pagination ta-center fw-700" v-show="photos.length">
+      <a href="javascript:void(0)"
+        class="gallery-pagination-navigation"
+        v-show="!isFirstPage"
+        @click="previous">
+        <<< Previous
+      </a>
+
+      <a href="javascript:void(0)"
+        class="gallery-pagination-navigation"
+        v-show="!isLastPage"
+        @click="next">
+        Next >>>
+      </a>
+    </div>
   </section>
 </template>
 
@@ -30,9 +58,14 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    photos() {
-      return this.$store.state.photos.items
-    },
+    ...mapGetters({
+      photos: 'photos/items',
+      totalItems: 'photos/totalItems',
+      totalPages: 'photos/totalPages',
+      currentPage: 'photos/currentPage',
+      isFirstPage: 'photos/isFirstPage',
+      isLastPage: 'photos/isLastPage',
+    }),
   },
 
   methods: {
@@ -40,6 +73,14 @@ export default {
       return {
         'background': `url(${photo.smallImageSrc}) no-repeat center`
       }
+    },
+
+    previous() {
+      this.$store.dispatch('photos/goPreviousPage')
+    },
+
+    next() {
+      this.$store.dispatch('photos/goNextPage')
     },
   }
 }
@@ -74,6 +115,14 @@ export default {
       height: 100px;
       color: $grey-666;
       overflow-y: auto;
+    }
+  }
+
+  .gallery-pagination {
+    & .gallery-pagination-navigation {
+      display: inline-block;
+      padding: 10px;
+      text-decoration: underline;
     }
   }
 </style>
