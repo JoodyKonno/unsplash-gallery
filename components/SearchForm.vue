@@ -36,6 +36,7 @@ export default {
   methods: {
     search(e) {
       e.preventDefault()
+      this.$store.commit('photos/setCurrentPage', 1)
       this.$store.dispatch('photos/searchPhotos')
     },
 

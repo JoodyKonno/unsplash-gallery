@@ -6,13 +6,22 @@ export const state = () => ({
   searchTerm: '',
   items: [],
   item: {},
+  totalItems: 0,
+  totalPages: 0,
+  currentPage: 1,
   lastTerms: [],
   lastTermsLimit: 5,
 })
 
 export const getters = {
   lastTerms: state => state.lastTerms.slice().reverse(),
+  items: state => state.items,
   item: state => state.item,
+  totalItems: state => state.totalItems,
+  totalPages: state => state.totalPages,
+  currentPage: state => state.currentPage,
+  isFirstPage: state => state.currentPage === 1,
+  isLastPage: state => state.currentPage === state.totalPages,
   author: state => {
     if (!state.item.author) {
       return ''
@@ -23,8 +32,9 @@ export const getters = {
 
 export const actions = {
   async searchPhotos({ state, commit }) {
-    const response = await SeachPhotosService.query({
+    const { results, total, total_pages } = await SeachPhotosService.query({
       q: state.searchTerm,
+      page: state.currentPage,
     })
 
     if (!state.lastTerms.includes(state.searchTerm)) {
@@ -36,7 +46,19 @@ export const actions = {
       commit('putTermOnTop')
     }
 
-    commit('setPhotos', response.results.map(result => new PhotoModel(result)))
+    commit('setPhotos', results.map(result => new PhotoModel(result)))
+    commit('setTotalItems', total)
+    commit('setTotalPages', total_pages)
+  },
+
+  goPreviousPage({ state, commit, dispatch }) {
+    commit('setCurrentPage', state.currentPage - 1)
+    dispatch('searchPhotos')
+  },
+
+  goNextPage({ state, commit, dispatch }) {
+    commit('setCurrentPage', state.currentPage + 1)
+    dispatch('searchPhotos')
   },
 
   getTermsFromStorage({ commit }) {
@@ -61,6 +83,18 @@ export const actions = {
 export const mutations = {
   setPhotos(state, payload) {
     state.items = payload
+  },
+
+  setTotalItems(state, val) {
+    state.totalItems = val
+  },
+
+  setTotalPages(state, val) {
+    state.totalPages = val
+  },
+
+  setCurrentPage(state, val) {
+    state.currentPage = val
   },
 
   setPhoto(state, payload) {

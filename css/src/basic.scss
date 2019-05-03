@@ -25,6 +25,7 @@
 }
 
 .button {
+  display: block;
   border: none;
   font-weight: 700;
   @include borderRadius(3px);
