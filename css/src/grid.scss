@@ -1,0 +1,24 @@
+.columns {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 1em;
+
+  &.has-3 {
+    @include sm {
+      max-width: 90%;
+      margin: 0 auto;
+      @include gridColumns(1fr);
+    }
+
+    @include md {
+      max-width: 90%;
+      margin: 0 auto;
+      @include gridColumns(1fr);
+    }
+
+    @include lg {
+      max-width: 100%;
+      @include gridColumns(1fr 1fr 1fr);
+    }
+  }
+}

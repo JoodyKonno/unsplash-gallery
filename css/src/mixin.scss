@@ -1,0 +1,33 @@
+// Small devices
+@mixin sm {
+  @media (max-width: #{$screen-sm-min}) { @content; }
+}
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-sm-min}) { @content; }
+}
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-md-min}) { @content; }
+}
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-lg-min}) { @content; }
+}
+
+@mixin borderRadius($radius) {
+  -webkit-border-radius: #{$radius};
+  -moz-border-radius: #{$radius};
+  border-radius: #{$radius};
+}
+
+@mixin backgroundCover() {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@mixin gridColumns($columns) {
+  grid-template-columns: #{$columns};
+}

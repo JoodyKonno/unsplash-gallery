@@ -1,7 +1,12 @@
 <template>
   <section class="container">
-    <search-form />
-    <gallery />
+    <div class="my-20">
+      <search-form />
+    </div>
+
+    <div class="mb-30">
+      <gallery />
+    </div>
   </section>
 </template>
 

@@ -1,0 +1,106 @@
+.container {
+  margin: 0 auto;
+
+  @include sm {
+    width: $container-sm-width;
+  }
+
+  @include md {
+    width: $container-sm-width;
+  }
+
+  @include lg {
+    width: $container-width;
+  }
+}
+
+.card {
+  border: 1px solid $grey-ccc;
+  text-align: center;
+  @include borderRadius(5px);
+
+  &.white {
+    background-color: $white;
+  }
+}
+
+.button {
+  border: none;
+  font-weight: 700;
+  @include borderRadius(3px);
+
+  &.blue {
+    background-color: blue;
+    color: white;
+  }
+}
+
+@each $size in $margin-sizes {
+  .mx-#{$size} {
+    margin-left: #{$size}px;
+    margin-right: #{$size}px;
+  }
+  .my-#{$size} {
+    margin-top: #{$size}px;
+    margin-bottom: #{$size}px;
+  }
+  .ma-#{$size} {
+    margin: #{$size}px;
+  }
+  .mt-#{$size} {
+    margin-top: #{$size}px;
+  }
+  .mb-#{$size} {
+    margin-bottom: #{$size}px;
+  }
+  .mr-#{$size} {
+    margin-right: #{$size}px;
+  }
+  .ml-#{$size} {
+    margin-left: #{$size}px;
+  }
+}
+
+@each $size in $padding-sizes {
+  .px-#{$size} {
+    padding-left: #{$size}px;
+    padding-right: #{$size}px;
+  }
+  .py-#{$size} {
+    padding-top: #{$size}px;
+    padding-bottom: #{$size}px;
+  }
+  .pa-#{$size} {
+    padding: #{$size}px;
+  }
+  .pt-#{$size} {
+    padding-top: #{$size}px;
+  }
+  .pb-#{$size} {
+    padding-bottom: #{$size}px;
+  }
+  .pr-#{$size} {
+    padding-right: #{$size}px;
+  }
+  .pl-#{$size} {
+    padding-left: #{$size}px;
+  }
+}
+
+@each $style in $text-align-styles {
+  .ta-#{$style} {
+    text-align: #{$style};
+  }
+}
+
+@each $size in $font-sizes {
+  .fs-#{$size} {
+    font-size: #{$size}px;
+  }
+}
+
+@each $weight in $font-weights {
+  .fw-#{$weight} {
+    font-weight: #{$weight};
+  }
+}

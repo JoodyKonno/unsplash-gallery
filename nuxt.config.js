@@ -1,6 +1,5 @@
 const pkg = require('./package')
 
-
 module.exports = {
   mode: 'universal',
 
@@ -11,7 +10,7 @@ module.exports = {
     title: pkg.name,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
@@ -28,6 +27,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '@/css/style.scss',
   ],
 
   /*
@@ -39,8 +39,13 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: [
-  ],
+  modules: ['@nuxtjs/style-resources'],
+
+  styleResources: {
+    scss: [
+      'css/style.scss',
+    ],
+  },
 
   /*
   ** Build configuration
