@@ -13,10 +13,10 @@ export const getters = {
   lastTerms: state => state.lastTerms.slice().reverse(),
   item: state => state.item,
   author: state => {
-    if (!state.author) {
+    if (!state.item.author) {
       return ''
     }
-    return state.author
+    return state.item.author
   }
 }
 

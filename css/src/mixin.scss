@@ -27,3 +27,7 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
+@mixin gridColumns($columns) {
+  grid-template-columns: #{$columns};
+}

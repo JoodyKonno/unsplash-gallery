@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="columns">
+    <div class="columns has-3">
       <div class="photo card white" v-for="photo in photos" :key="photo.id">
         <nuxt-link :to="`/photo/${photo.id}`">
           <div class="photo-image">

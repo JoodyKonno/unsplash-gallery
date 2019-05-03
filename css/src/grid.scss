@@ -1,9 +1,15 @@
 .columns {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
   grid-column-gap: 10px;
   grid-row-gap: 1em;
+
+  &.has-3 {
+    @include gridColumns(1fr 1fr 1fr);
+  }
+
+  &.has-2 {
+    @include gridColumns(1fr 1fr);
+  }
 
   @include sm {
     max-width: 90%;

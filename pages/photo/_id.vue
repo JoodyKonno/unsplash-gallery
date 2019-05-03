@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="container">
     <photo-post />
   </section>
 </template>
