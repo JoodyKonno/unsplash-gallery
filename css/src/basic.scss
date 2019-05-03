@@ -33,6 +33,11 @@
     background-color: blue;
     color: white;
   }
+
+  &.primary {
+    background-color: $primary-button-color;
+    color: $white;
+  }
 }
 
 @each $size in $margin-sizes {

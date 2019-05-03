@@ -2,7 +2,7 @@
   <section>
     <form>
       <input type="text" v-model.lazy="searchTerm" />
-      <button type="submit" class="button blue" @click="search">Search</button>
+      <button type="submit" class="button primary" @click="search">Search</button>
     </form>
     <div class="search-form-terms">
       <span class="fs-11 fw-600" v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
@@ -52,6 +52,7 @@ export default {
     font-size: 18px;
     border: none;
     color: $grey-333;
+    background-color: $primary-input-color;
 
     @include sm {
       display: block;
@@ -73,6 +74,7 @@ export default {
 
   button[type="submit"] {
     height: 30px;
+    margin-top: -2px;
 
     @include sm {
       display: block;
@@ -93,6 +95,8 @@ export default {
   }
 
   .search-form-terms {
+    color: $grey-f3;
+
     @include sm {
       max-width: 90%;
       margin: 0 auto;
