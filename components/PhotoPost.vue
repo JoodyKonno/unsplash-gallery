@@ -12,7 +12,7 @@
         <span class="fs-11 fw-700">{{ author.username }}</span>
       </div>
 
-      <div class="photo-data-description py-20 ta-justify">
+      <div class="photo-data-description py-20 pr-10 ta-justify">
         <span class="fs-12">{{ photo.description }}</span>
       </div>
 
@@ -46,13 +46,21 @@ export default {
 
 <style lang="scss" scoped>
   .columns {
-    @include gridColumns(3fr 1fr)
+    @include gridColumns(3fr 1fr);
+
+    @include sm {
+      @include gridColumns(1fr);
+    }
   }
 
   .photo {
     & .photo-image {
       height: 600px;
       background-color: $grey-333;
+
+      @include sm {
+        height: 200px;
+      }
 
       & .photo-image-src {
         width: auto;
