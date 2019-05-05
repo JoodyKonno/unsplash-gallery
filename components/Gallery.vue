@@ -12,7 +12,15 @@
       </span>
     </div>
 
-    <div class="columns has-3">
+    <div class="gallery-no-photos ta-center" v-show="!photos.length && !isPristineSearch">
+      <span class="fs-12">
+        Your search for
+        <span class="fw-700">{{ searchTerm }} </span>
+        returned empty matches
+      </span>
+    </div>
+
+    <div class="columns has-3" v-show="photos.length">
       <div class="photo card white" v-for="photo in photos" :key="photo.id">
         <nuxt-link :to="`/photo/${photo.id}`">
           <div class="photo-image">
@@ -63,12 +71,14 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
+      searchTerm: 'photos/searchTerm',
       photos: 'photos/items',
       totalItems: 'photos/totalItems',
       totalPages: 'photos/totalPages',
       currentPage: 'photos/currentPage',
       isFirstPage: 'photos/isFirstPage',
       isLastPage: 'photos/isLastPage',
+      isPristineSearch: 'photos/isPristineSearch',
     }),
   },
 
