@@ -9,6 +9,7 @@ export const state = () => ({
   totalItems: 0,
   totalPages: 0,
   currentPage: 1,
+  isLoading: false,
   lastTerms: [],
   lastTermsLimit: 5,
 })
@@ -22,6 +23,7 @@ export const getters = {
   currentPage: state => state.currentPage,
   isFirstPage: state => state.currentPage === 1,
   isLastPage: state => state.currentPage === state.totalPages,
+  isLoading: state => state.isLoading,
   author: state => {
     if (!state.item.author) {
       return ''
@@ -32,23 +34,30 @@ export const getters = {
 
 export const actions = {
   async searchPhotos({ state, commit }) {
-    const { results, total, total_pages } = await SeachPhotosService.query({
-      q: state.searchTerm,
-      page: state.currentPage,
-    })
+    commit('setIsLoading', true)
+    try {
+      const { results, total, total_pages } = await SeachPhotosService.query({
+        q: state.searchTerm,
+        page: state.currentPage,
+      })
 
-    if (!state.lastTerms.includes(state.searchTerm)) {
-      if (state.lastTerms.length >= state.lastTermsLimit) {
-        commit('removeOldestTerm')
+      if (!state.lastTerms.includes(state.searchTerm)) {
+        if (state.lastTerms.length >= state.lastTermsLimit) {
+          commit('removeOldestTerm')
+        }
+        commit('addTermToStack')
+      } else {
+        commit('putTermOnTop')
       }
-      commit('addTermToStack')
-    } else {
-      commit('putTermOnTop')
-    }
 
-    commit('setPhotos', results.map(result => new PhotoModel(result)))
-    commit('setTotalItems', total)
-    commit('setTotalPages', total_pages)
+      commit('setPhotos', results.map(result => new PhotoModel(result)))
+      commit('setTotalItems', total)
+      commit('setTotalPages', total_pages)
+    } catch (err) {
+      // none
+    } finally {
+      commit('setIsLoading', false)
+    }
   },
 
   goPreviousPage({ state, commit, dispatch }) {
@@ -95,6 +104,10 @@ export const mutations = {
 
   setCurrentPage(state, val) {
     state.currentPage = val
+  },
+
+  setIsLoading(state, val) {
+    state.isLoading = val
   },
 
   setPhoto(state, payload) {

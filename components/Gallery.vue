@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="gallery" :class="galleryClass">
     <div class="gallery-meta my-10" v-show="photos.length">
       <span class="fs-12">
         Page
