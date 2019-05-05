@@ -5,7 +5,7 @@
       <button type="submit" class="button primary" @click="search">Search</button>
     </form>
     <div class="search-form-terms">
-      <span class="fs-12">Suas últimas pesquisas:</span>
+      <span class="fs-12">Your last searches:</span>
       <span class="search-form-terms-word fs-11 fw-600" v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
         {{ term }}
       </span>
