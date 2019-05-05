@@ -18,6 +18,11 @@ import { mapGetters } from 'vuex';
 export default {
   mounted() {
     this.$store.dispatch('photos/getTermsFromStorage')
+
+    if (this.$route.query && this.$route.query.q) {
+      this.searchTerm = this.$route.query.q
+      this.doSearch()
+    }
   },
 
   computed: {
@@ -37,15 +42,24 @@ export default {
   methods: {
     search(e) {
       e.preventDefault()
-      this.$store.commit('photos/setCurrentPage', 1)
-      this.$store.dispatch('photos/searchPhotos')
+      this.doSearch()
     },
 
     useTerm(term) {
       this.$store.commit('photos/setSearchTerm', term)
+      this.doSearch()
+    },
+
+    doSearch() {
       this.$store.commit('photos/setCurrentPage', 1)
       this.$store.dispatch('photos/searchPhotos')
-    }
+
+      this.$router.push({
+        query: {
+          q: this.searchTerm,
+        },
+      })
+    },
   },
 }
 </script>
