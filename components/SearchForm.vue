@@ -68,6 +68,7 @@ export default {
   input[type="text"] {
     height: 30px;
     font-size: 18px;
+    padding: 0 5px;
     border: none;
     color: $grey-333;
     background-color: $primary-input-color;
