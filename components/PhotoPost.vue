@@ -13,7 +13,13 @@
       </div>
 
       <div class="photo-data-description py-20 pr-10 ta-justify">
-        <span class="fs-12">{{ photo.description }}</span>
+        <span class="fs-12" v-show="photo.description">
+          {{ photo.description }}
+        </span>
+
+        <span class="fs-12" v-show="!photo.description && photo.altDescription">
+          {{ photo.altDescription }}
+        </span>
       </div>
 
       <div class="photo-data-likes">

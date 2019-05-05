@@ -27,8 +27,12 @@
           </div>
 
           <div class="photo-description ta-justify">
-            <span class="fs-12">
+            <span class="fs-12" v-show="photo.description">
               {{ photo.description }}
+            </span>
+
+            <span class="fs-12" v-show="!photo.description && photo.altDescription">
+              {{ photo.altDescription }}
             </span>
           </div>
         </div>
