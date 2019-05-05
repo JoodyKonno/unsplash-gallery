@@ -9,22 +9,22 @@
     <div class="photo-data my-10">
       <div class="photo-data-author pb-5">
         <img :src="author.profileImageSmall" />
-        <span class="fs-11 fw-700">{{ author.username }}</span>
+        <span class="fs-12 fw-700">{{ author.username }}</span>
       </div>
 
       <div class="photo-data-description py-20 pr-10 ta-justify">
-        <span class="fs-12" v-show="photo.description">
+        <span class="fs-14" v-show="photo.description">
           {{ photo.description }}
         </span>
 
-        <span class="fs-12" v-show="!photo.description && photo.altDescription">
+        <span class="fs-14" v-show="!photo.description && photo.altDescription">
           {{ photo.altDescription }}
         </span>
       </div>
 
       <div class="photo-data-likes">
-        <span class="fs-12">{{ photo.likes }}</span>
-        <span class="fs-11">likes</span>
+        <span class="fs-14">{{ photo.likes }}</span>
+        <span class="fs-12">likes</span>
       </div>
     </div>
   </section>
