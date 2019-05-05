@@ -5,7 +5,8 @@
       <button type="submit" class="button primary" @click="search">Search</button>
     </form>
     <div class="search-form-terms">
-      <span class="fs-11 fw-600" v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
+      <span class="fs-14">Your last searches:</span>
+      <span class="search-form-terms-word fs-12 fw-600" v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
         {{ term }}
       </span>
     </div>
@@ -17,6 +18,11 @@ import { mapGetters } from 'vuex';
 export default {
   mounted() {
     this.$store.dispatch('photos/getTermsFromStorage')
+
+    if (this.$route.query && this.$route.query.q) {
+      this.searchTerm = this.$route.query.q
+      this.doSearch()
+    }
   },
 
   computed: {
@@ -36,13 +42,24 @@ export default {
   methods: {
     search(e) {
       e.preventDefault()
-      this.$store.commit('photos/setCurrentPage', 1)
-      this.$store.dispatch('photos/searchPhotos')
+      this.doSearch()
     },
 
     useTerm(term) {
       this.$store.commit('photos/setSearchTerm', term)
-    }
+      this.doSearch()
+    },
+
+    doSearch() {
+      this.$store.commit('photos/setCurrentPage', 1)
+      this.$store.dispatch('photos/searchPhotos')
+
+      this.$router.push({
+        query: {
+          q: this.searchTerm,
+        },
+      })
+    },
   },
 }
 </script>
@@ -51,6 +68,7 @@ export default {
   input[type="text"] {
     height: 30px;
     font-size: 18px;
+    padding: 0 5px;
     border: none;
     color: $grey-333;
     background-color: $primary-input-color;
@@ -110,6 +128,10 @@ export default {
 
     @include lg {
       max-width: 100%;
+    }
+
+    & .search-form-terms-word {
+      cursor: pointer;
     }
   }
 </style>

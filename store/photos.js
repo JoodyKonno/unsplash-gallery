@@ -4,6 +4,7 @@ import PhotoModel from '../models/PhotoModel'
 
 export const state = () => ({
   searchTerm: '',
+  isPristineSearch: true,
   items: [],
   item: {},
   totalItems: 0,
@@ -16,6 +17,7 @@ export const state = () => ({
 
 export const getters = {
   lastTerms: state => state.lastTerms.slice().reverse(),
+  searchTerm: state => state.searchTerm,
   items: state => state.items,
   item: state => state.item,
   totalItems: state => state.totalItems,
@@ -24,6 +26,7 @@ export const getters = {
   isFirstPage: state => state.currentPage === 1,
   isLastPage: state => state.currentPage === state.totalPages,
   isLoading: state => state.isLoading,
+  isPristineSearch: state => state.isPristineSearch,
   author: state => {
     if (!state.item.author) {
       return ''
@@ -57,6 +60,7 @@ export const actions = {
       // none
     } finally {
       commit('setIsLoading', false)
+      commit('setIsPristineSearch', false)
     }
   },
 
@@ -108,6 +112,10 @@ export const mutations = {
 
   setIsLoading(state, val) {
     state.isLoading = val
+  },
+
+  setIsPristineSearch(state, val) {
+    state.isPristineSearch = val
   },
 
   setPhoto(state, payload) {
