@@ -1,5 +1,9 @@
 <template>
   <section class="container">
+    <div class="ta-center mt-20">
+      <a class="fw-700 fs-12" @click="$router.go(-1)">< Voltar</a>
+    </div>
+
     <photo-post />
   </section>
 </template>
