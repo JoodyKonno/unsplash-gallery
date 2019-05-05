@@ -5,7 +5,8 @@
       <button type="submit" class="button primary" @click="search">Search</button>
     </form>
     <div class="search-form-terms">
-      <span class="fs-11 fw-600" v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
+      <span class="fs-12">Suas últimas pesquisas:</span>
+      <span class="search-form-terms-word fs-11 fw-600" v-for="(term, i) in lastTerms" :key="i" @click="useTerm(term)">
         {{ term }}
       </span>
     </div>
@@ -42,6 +43,8 @@ export default {
 
     useTerm(term) {
       this.$store.commit('photos/setSearchTerm', term)
+      this.$store.commit('photos/setCurrentPage', 1)
+      this.$store.dispatch('photos/searchPhotos')
     }
   },
 }
@@ -110,6 +113,10 @@ export default {
 
     @include lg {
       max-width: 100%;
+    }
+
+    & .search-form-terms-word {
+      cursor: pointer;
     }
   }
 </style>
