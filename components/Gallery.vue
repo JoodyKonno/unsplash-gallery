@@ -1,5 +1,5 @@
 <template>
-  <section class="gallery" :class="galleryClass">
+  <section class="gallery">
     <div class="gallery-meta my-10" v-show="photos.length">
       <span class="fs-12">
         Page
@@ -75,12 +75,25 @@ export default {
       }
     },
 
+    scrollToTop() {
+      window.scroll({
+        top: 0,
+        behavior: 'smooth'
+      })
+    },
+
     previous() {
       this.$store.dispatch('photos/goPreviousPage')
+      this.$nextTick(() => {
+        this.scrollToTop();
+      })
     },
 
     next() {
       this.$store.dispatch('photos/goNextPage')
+      this.$nextTick(() => {
+        this.scrollToTop();
+      })
     },
   }
 }
